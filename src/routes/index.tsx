@@ -94,7 +94,7 @@ function LighthousePage() {
     setTimeout(() => setState("done"), 2200);
   };
 
-  const audits = AUDITS[tab].filter((a) => !onlyFailed || a.score < 50);
+  const audits = (AUDITS[tab] ?? []).filter((a) => !onlyFailed || a.score < 50);
 
   return (
     <div className="min-h-screen bg-background font-sans text-foreground">
@@ -184,7 +184,7 @@ function LighthousePage() {
                   {Object.keys(AUDITS).map((k) => (
                     <button key={k} onClick={() => setTab(k)}
                       className={`rounded-lg px-3 py-1.5 text-sm font-medium transition ${tab === k ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted"}`}>
-                      {k} <span className="ml-1 opacity-70">{AUDITS[k].length}</span>
+                      {k} <span className="ml-1 opacity-70">{AUDITS[k]?.length ?? 0}</span>
                     </button>
                   ))}
                 </div>
